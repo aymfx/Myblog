@@ -52,13 +52,24 @@ var writeStream=fs.createWriteStream('../other/output.txt');
 
 //pipe 两个文件合并
 var fs=require('fs');
-
-var readStream=fs.createReadStream('../other/output.txt');
-var writeStream=fs.createWriteStream('../other/input.txt');
+var readStream=fs.createReadStream('../other/input.txt');
+var writeStream=fs.createWriteStream('../other/output.txt');
 
 //管道读写操作
 readStream.pipe(writeStream);
 console.log("程序执行完毕");
+//会把文件内容覆盖掉
+
+//链式流
+
+var fs=require('fs');
+
+var zlib=require('zlib');
+
+//压缩input.txt文件为input.txt.gz
+fs.createReadStream('../other/input.txt').pipe(zlib.createGzip()).pipe(fs.createWriteStream('../other/input.txt.gz'));
+
+console.log("文件压缩完成");
 
 
 

@@ -1,5 +1,5 @@
 #npm常用命令
-NPM提供了很多命令，例如install和publish，使用npm help可查看所有命令。
+ - NPM提供了很多命令，例如install和publish，使用npm help可查看所有命令。
 NPM提供了很多命令，例如install和publish，使用npm help可查看所有命令。
 使用npm help <command>可查看某条命令的详细帮助，例如npm help install。
 在package.json所在目录下使用npm install . -g可先在本地安装当前命令行程序，可用于发布前的本地测试。
@@ -341,5 +341,57 @@ data - 当有数据可读时触发。
 end - 没有更多的数据可读时触发。
 error - 在接收和写入过程中发生错误时触发。
 finish - 所有数据已被写入到底层系统时触发。
+---->代码在stream.js
 
 
+#Node.js模块系统
+
+为了让Node.js的文件可以相互调用，Node.js提供了一个简单的模块系统。
+模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个 Node.js 文件就是一个模块，这个文件可能是JavaScript 代码、JSON 或者编译过的C/C++ 扩展。
+
+##服务端的模块放在哪里
+Node.js中自带了一个叫做"http"的模块，我们在我们的代码中请求它并把返回值赋给一个本地变量。
+这把我们的本地变量变成了一个拥有所有 http 模块所提供的公共方法的对象。
+Node.js 的 require方法中的文件查找策略如下：
+由于Node.js中存在4类模块（原生模块和3种文件模块），尽管require方法极其简单，但是内部的加载却是十分复杂的，其加载优先级也各自不同。如下图所示：img/nodejs-require.jpg
+
+###从文件模块缓存中加载
+尽管原生模块与文件模块的优先级不同，但是都不会优先于从文件模块的缓存中加载已经存在的模块。
+从原生模块加载
+原生模块的优先级仅次于文件模块缓存的优先级。require方法在解析文件名之后，优先检查模块是否在原生模块列表中。以http模块为例，尽管在目录下存在一个http/http.js/http.node/http.json文件，require("http")都不会从这些文件中加载，而是从原生模块中加载。
+原生模块也有一个缓存区，同样也是优先从缓存区加载。如果缓存区没有被加载过，则调用原生模块的加载方式进行加载和执行。
+
+###从文件加载
+当文件模块缓存中不存在，而且不是原生模块的时候，Node.js会解析require方法传入的参数，并从文件系统中加载实际的文件，加载过程中的包装和编译细节在前一节中已经介绍过，这里我们将详细描述查找文件模块的过程，其中，也有一些细节值得知晓。
+require方法接受以下几种参数的传递：
+http、fs、path等，原生模块。
+./mod或../mod，相对路径的文件模块。
+/pathtomodule/mod，绝对路径的文件模块。
+mod，非原生模块的文件模块。
+
+
+---->代码在module.js
+
+
+#Node.js 函数
+在JavaScript中，一个函数可以作为另一个函数接收一个参数。我们可以先定义一个函数，然后传递，也可以在传递参数的地方直接定义函数。
+
+---->代码在fn.js
+
+我们要为路由提供请求的URL和其他需要的GET及POST参数，随后路由需要根据这些数据来执行相应的代码。
+因此，我们需要查看HTTP请求，从中提取出请求的URL以及GET/POST参数。这一功能应当属于路由还是服务器（甚至作为一个模块自身的功能）确实值得探讨，但这里暂定其为我们的HTTP服务器的功能。
+我们需要的所有数据都会包含在request对象中，该对象作为onRequest()回调函数的第一个参数传递。但是为了解析这些数据，我们需要额外的Node.JS模块，它们分别是url和querystring模块。
+
+							url.parse(string).query
+                                           |
+           url.parse(string).pathname      |
+                       |                   |
+                       |                   |
+                     ------ -------------------
+	http://localhost:8888/start?foo=bar&hello=world
+                                ---       -----
+                                 |          |
+                                 |          |
+              querystring(string)["foo"]    |
+                                            |
+                         querystring(string)["hello"]
