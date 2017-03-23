@@ -378,6 +378,10 @@ mod，非原生模块的文件模块。
 
 ---->代码在fn.js
 
+
+
+
+#Node.js 路由
 我们要为路由提供请求的URL和其他需要的GET及POST参数，随后路由需要根据这些数据来执行相应的代码。
 因此，我们需要查看HTTP请求，从中提取出请求的URL以及GET/POST参数。这一功能应当属于路由还是服务器（甚至作为一个模块自身的功能）确实值得探讨，但这里暂定其为我们的HTTP服务器的功能。
 我们需要的所有数据都会包含在request对象中，该对象作为onRequest()回调函数的第一个参数传递。但是为了解析这些数据，我们需要额外的Node.JS模块，它们分别是url和querystring模块。
@@ -395,3 +399,111 @@ mod，非原生模块的文件模块。
               querystring(string)["foo"]    |
                                             |
                          querystring(string)["hello"]
+
+---->代码在route.js server.js route-index.js start.js
+
+
+#Node.js 全局对象
+	JavaScript 中有一个特殊的对象，称为全局对象（Global Object），它及其所有属性都可 以在程序的任何地方访问，即全局变量。
+	在浏览器JavaScript 中，通常window 是全局对象， 而Node.js 中的全局对象是 global，所有全局变量（除了 global 本身以外）都是 global 对象的属性。
+	我们在Node.js 中能够直接访问到对象通常都是 global 的属性，如 console、process 等，下面逐一介绍。
+
+##process
+	process 是一个全局变量，即 global 对象的属性。
+	它用于描述当前Node.js 进程状态 的对象，提供了一个与操作系统的简单接口。通常在你写本地命令行程序的时候，少不了要 和它打交道。下面将会介绍process 对象的一些最常用的成员方法。
+	process.argv是命令行参数数组，第一个元素是 node，第二个元素是脚本文件名， 从第三个元素开s始每个元素是一个运行参数。
+
+##console
+	console 用于提供控制台标准输出，它是由Internet Explorer 的JScript 引擎提供的调试 工具，后来逐渐成为浏览器的事实标准。
+	Node.js 沿用了这个标准，提供与习惯行为一致的 console 对象，用于向标准输出流（stdout）或标准错误流（stderr）输出字符。  console.log()：向标准输出流打印字符并以换行符结束。
+	console.log 接受若干 个参数，如果只有一个参数，则输出这个参数的字符串形式。如果有多个参数，则 以类似于C 语言 printf() 命令的格式输出。
+	第一个参数是一个字符串，如果没有 参数，只打印一个换行。
+	console.error()：与console.log() 用法相同，只是向标准错误流输出。
+	console.trace()：向标准错误流输出当前的调用栈。
+
+---->代码在global.js argv.js
+
+#Node.js 常用工具 util
+	util 是一个Node.js 核心模块，提供常用函数的集合，用于弥补核心JavaScript 的功能 过于精简的不足。
+
+	util.inherits
+	
+	util.inherits(constructor, superConstructor)是一个实现对象间原型继承 的函数。
+	JavaScript 的面向对象特性是基于原型的，与常见的基于类的不同。JavaScript 没有 提供对象继承的语言级别特性，而是通过原型复制来实现的。
+	
+
+---->代码在util.inherits.js
+
+
+	util.inspect
+	
+	util.inspect(object,[showHidden],[depth],[colors])是一个将任意对象转换 为字符串的方法，通常用于调试和错误输出。它至少接受一个参数 object，即要转换的对象。
+	showHidden 是一个可选参数，如果值为 true，将会输出更多隐藏信息。
+	depth 表示最大递归的层数，如果对象很复杂，你可以指定层数以控制输出信息的多 少。如果不指定depth，默认会递归2层，指定为 null 表示将不限递归层数完整遍历对象。 如果color 值为 true，输出格式将会以ANSI 颜色编码，通常用于在终端显示更漂亮 的效果。
+	特别要指出的是，util.inspect 并不会简单地直接把对象转换为字符串，即使该对 象定义了toString 方法也不会调用。
+	
+---->代码在util.inspect.js
+
+	util.isArray(object)
+	
+	如果给定的参数 "object" 是一个数组返回true，否则返回false
+	
+
+	util.isRegExp(object)
+	
+	如果给定的参数 "object" 是一个正则表达式返回true，否则返回false。
+
+	util.isDate(object)
+	
+	如果给定的参数 "object" 是一个日期返回true，否则返回false。
+
+	util.isError(object)
+	
+	如果给定的参数 "object" 是一个错误对象返回true，否则返回false。
+
+---->代码在utils.js
+
+-----http://nodejs.org/api/util.html 了解详细内容。
+
+
+#Node.js 文件系统
+
+	Node.js 文件系统封装在 fs 模块是中，它提供了文件的读取、写入、更名、删除、遍历目录、链接等POSIX 文件系统操作。
+	与其他模块不同的是，fs 模块中所有的操作都提供了异步的和 同步的两个版本，例如读取文件内容的函数有异步的 fs.readFile() 和同步的 fs.readFileSync()。我们以几个函数为代表，介绍 fs 常用的功能，并列出 fs 所有函数 的定义和功能。
+	
+ - fs.readFile
+	Node.js读取文件函数语法如下：
+	fs.readFile(filename,[encoding],[callback(err,data)])
+	filename（必选），表示要读取的文件名。
+	encoding（可选），表示文件的字符编码。
+	callback 是回调函数，用于接收文件的内容。
+	如果不指 定 encoding，则 callback 就是第二个参数。回调函数提供两个参数 err 和 data，err 表 示有没有错误发生，data 是文件内容。如果指定了 encoding，data 是一个解析后的字符 串，否则 data 将会是以 Buffer 形式表示的二进制数据。
+	
+ - fs.readFileSync
+
+	fs.readFileSync(filename, [encoding])是 fs.readFile 同步的版本。它接受 的参数和 fs.readFile 相同，而读取到的文件内容会以函数返回值的形式返回。如果有错 误发生，fs 将会抛出异常，你需要使用 try 和 catch 捕捉并处理异常。
+	注意：与同步I/O 函数不同，Node.js 中异步函数大多没有返回值。
+
+ - fs.open
+
+	fs.open(path, flags, [mode], [callback(err, fd)])是POSIX open 函数的 封装，与C 语言标准库中的 fopen 函数类似。它接受两个必选参数，path 为文件的路径， flags 可以是以下值。
+	r ：以读取模式打开文件。
+	r+ ：以读写模式打开文件。
+	w ：以写入模式打开文件，如果文件不存在则创建。
+	w+ ：以读写模式打开文件，如果文件不存在则创建。
+	a ：以追加模式打开文件，如果文件不存在则创建。
+	a+ ：以读取追加模式打开文件，如果文件不存在则创建
+
+ - fs.read
+
+	fs.read语法格式如下：
+	fs.read(fd, buffer, offset, length, position, [callback(err, bytesRead, buffer)])
+	参数说明：
+		fd: 读取数据并写入 buffer 指向的缓冲区对象。
+		offset: 是buffer 的写入偏移量。
+		length: 是要从文件中读取的字节数。
+		position: 是文件读取的起始位置，如果 position 的值为 null，则会从当前文件指针的位置读取。
+		callback:回调函数传递bytesRead 和 buffer，分别表示读取的字节数和缓冲区对象。
+		
+---->http://nodejs.org/api/fs.html
+---->readFile.js

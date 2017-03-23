@@ -1,8 +1,4 @@
-var http=require('http');
-var url=require('url');
-
-function start(){
-	  function onRequest(request,response){
-	  	  var pathname=url.parse(request.url).pathname;
-	  }
+function route(pathname){
+	console.log('About to a request for '+pathname);
 }
+exports.route=route;

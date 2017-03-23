@@ -7,10 +7,14 @@ alert(a);*/
 var a;
 alert(a);*/
 
-function * gen() {
+/*function * gen() {
     yield 1;
     yield 2;
     yield 3;
 }
 
-gen()
+gen()*/
+/*'use strict'
+var x=true;
+if (x) {  var foo = function() {}}*/
+output("haha");
