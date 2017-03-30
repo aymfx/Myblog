@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="demo3">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<!--AngularJS 服务(Service)-->
+		
+		<div id="" ng-controller="myDemo1">
+			<p>获去url地址</p>
+			<p>{{"我的地址是"+myUrl}}</p>
+		</div>
+		
+		<div id="" ng-controller="myDemo2">
+			<p>获取服务端传来的数据</p>
+			<p>{{"刘洋说:"+data}}</p>
+		</div>
+		
+		<div id="" ng-controller="myDemo3">
+			<p>延时定时器</p>
+			<p>{{"刘洋说:"+data}}</p>
+		</div>
+		
+		<div id="" ng-controller="myDemo4">
+			<p>定时器</p>
+			<p>{{"刘洋说现在时间:"+data}}</p>
+		</div>
+		
+		<div ng-controller="myDemo5">
+			<p>自定义函数，讲数字转换成16进制数</p>
+			<input type="text" ng-model="data"/>
+			<p>{{"我是16进制数"+data1}}</p>
+		</div>
+		
+		<!--去抖动-->
+		<div ng-controller="myDemo6">
+			<p>用ajax发送请求</p>
+			<input type="text" ng-model="key"/>
+			<ul>
+				<li ng-repeat="x in arr">
+					{{x.name}}
+				</li>
+			</ul>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/server.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

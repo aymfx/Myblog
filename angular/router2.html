@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/angular-route.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app=angular.module('myroute',['ngRoute']);
+			app.run(['$rootScope', function(root){
+			root.list = [1,2,3,4]	 	
+		}]);
+			app.factory('listData',function(){
+				var list = [{
+									name: 'ly',
+										age: 18
+									},{
+										name: 'md',
+										age: 19
+									},{
+										name: 'tttt',
+										age: 20
+									}]
+				
+				return {
+					all:list
+				}
+			})
+			app.controller('HomeController',function($scope,$route){$scope.$route=$route});
+			app.controller('AboutController',function($scope,$route){$scope.$route=$route});
+			app.controller('detailController',["$scope","$rootScope",'$routeParams','listData',function(scope,root,params,listdata){
+				   scope.name = params.name;
+				   scope.age = params.age;
+				   scope.item=listdata.all[params.id];
+				   
+				   
+			}])
+			app.config(function($routeProvider){
+				$routeProvider
+				.when('/home',{
+					templateUrl:"router2.home.html",
+					controller:"HomeController"
+				})
+				.when('/about',{
+					templateUrl:'router2.about.html',
+					controller:'AboutController'
+				})
+				.when('/detail/:id',{
+					templateUrl:'router.detail.html',
+					controller:'detailController'
+				})
+				.otherwise({
+					redirectTo:'/home'
+				});
+			});
+		</script>
+	</head>
+	<body ng-app="myroute">
+		<!--<script type="text/ng-template" id="router2.home.html">
+			<h1> home </h1>
+		</script>
+		//可以作为html模板
+		<script type="text/ng-template" id="router2.about.html">
+			<h1> about </h1>
+		</script>-->
+		
+		<div>
+			<div id="navigation">
+				<a href="#/home">home</a>
+				<a href="#/about">About</a>
+			</div>
+			<ul>
+				<li><a href="#/detail/0">第一项</a></li>
+				<li><a href="#/detail/1?name=ly&age=18">第二项</a></li>
+				<li><a href="#/detail/2">第三项</a></li>
+			</ul>
+		</div>
+		
+		<div ng-view>
+			
+		</div>
+		
+		
+	</body>
+</html>
+

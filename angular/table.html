@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="table">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			table,td{
+				border: 1px solid #cyan;
+				border-collapse: collapse;
+				padding: 5px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div ng-controller="tableCtrl">
+			<table>
+				<tr ng-repeat="x in names">
+					<td style="background:#f1f1f1;" ng-if="$odd">
+						{{x.Name}}
+					</td>
+					<td ng-if="$even">
+						{{x.Name}}
+					</td>
+					<td style="background:#f1f1f1;" ng-if="$odd">
+						{{x.Country}}
+					</td>
+					<td ng-if="$even">
+						{{x.Country}}
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		
+		
+		<!-----------分割线--------------------------------------------->
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app=angular.module('table',[]);
+			app.controller('tableCtrl',['$scope','$http',function(scope,http){
+				
+				
+		http({
+        method: 'GET',
+        url: 'other/table.php'
+    }).then(function successCallback(response) {
+            console.log(response);
+            scope.names=response.data.records;
+            
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+    });
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			}])
+		</script>
+	</body>
+</html>

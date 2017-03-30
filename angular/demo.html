@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-app='test'>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<style type="text/css">
+			body{
+				color: black;
+			}
+			.myForm input.ng-valid{
+				color:lightcyan
+			}
+			.myForm input.ng-invalid{
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<!--ng-modle-->
+		<p>名字:<input type="text" ng-model="name"/></p>
+		<h4>hellow {{name}}</h4>
+		
+			<!--数值的运算-->
+		<div>12+36={{12+36}}</div>
+		<p>This is your first angular expression {{6 * 7}}</p>
+		
+		<!--ng-init-->
+		<div ng-init="firstName='ly'">12222</div>
+		<p ng-bind="firstName"></p>
+		
+		<!--ng-controller-->
+		<div ng-controller="myCtrl">
+			姓:<input type="" ng-model='firstName'/><br />
+			名:<input type="" ng-model='lastName'/><br />
+			姓名是:{{firstName+lastName}}
+		</div>
+		<!--ng-repeat-->
+		<div ng-init="
+			lists=[1,22,1,332];
+			names=['ly','md'];
+			objs=[
+			{name:'Jani',country:'Norway'},
+			{name:'Hege',country:'Sweden'},
+			{name:'Kai',country:'Denmark'}];
+			">
+			<p>我们来循环数组</p>
+			<ul>
+				<li ng-repeat="x in names ">是{{ x }}</li>
+			</ul>
+			<p>我们来循环对象数组</p>
+			<ul>
+				<li ng-repeat="x in objs">{{ x.name+","+x.country  }}</li>
+			</ul>
+			<p>测试重复</p>
+			<ul>
+				<li ng-repeat="y in lists track by $index">{{ y }}</li>
+			</ul>
+		</div>
+		
+		
+		<div>
+			<p>创建自定义的指令1</p>
+			<runoob-tmp></runoob-tmp>
+			<p>创建自定义的指令2</p>
+			<div runoob-tmp></div>
+			<p>创建自定义的指令3</p>
+			<div class="runoob-tmp"></div>
+			<p>创建自定义的指令4</p>
+			<!-- directive: runoob-tmp -->
+		</div>
+		
+		<div>
+			<!--表单验证-->
+			<form name='myForm'>
+				Email:
+					<input type="email" name="myAddress" ng-model="text" />
+					<span ng-show="myForm.myAddress.$error.email">
+						不是合法的邮箱
+					</span>
+					<span ng-show="text">
+						合法的邮箱
+					</span>
+					<h1>状态</h1>
+				    {{myForm.myAddress.$valid+":$valid"}}
+				    {{myForm.myAddress.$dirty+":$dirty"}}
+				    {{myForm.myAddress.$touched+":$touched"}}
+				    {{myForm.myAddress.$error+":$error"}}
+			</form>
+		</div>
+		<div>
+			<!--css类-->
+			<form ng-app="" class="myForm">输入你的名字:
+    		<input name="myAddress" ng-model="fouce" required>
+			</form>
+		</div>
+		
+		<div>
+			
+		</div>
+		
+		
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+  			var app=angular.module('test',[]);
+  			
+  			//双向绑定
+  			app.controller('myCtrl',function($scope){
+  				$scope.firstName="";
+  				$scope.lastName="";
+  			})
+  			//创建自定义的指令
+  			app.directive('runoobTmp',function(){
+  				return {
+  					restrict:"EACM",
+					/*restrict 值可以是以下几种:
+							E 作为元素名使用
+							A 作为属性使用
+							C 作为类名使用
+							M 作为注释使用*/
+					replace:true,//
+  					template : "<h1>我是自定义刘洋</h1>"
+  				};
+  			})
+  			
+			//
+		</script>
+	</body>
+</html>
+

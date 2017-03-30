@@ -507,3 +507,38 @@ mod，非原生模块的文件模块。
 		
 ---->http://nodejs.org/api/fs.html
 ---->readFile.js
+
+#Node.js 工具模块
+
+ - OS 模块
+	提供基本的系统操作函数。
+	
+	
+	序号      	  方法 & 描述
+	1		os.tmpdir()返回操作系统的默认临时文件夹。
+	2		os.endianness()返回 CPU 的字节序，可能的是 "BE" 或 "LE"。
+	3		os.hostname()返回操作系统的主机名。
+	4		os.type()返回操作系统名
+	5		os.platform()返回操作系统名
+	6		os.arch()返回操作系统 CPU 架构，可能的值有 "x64"、"arm" 和 "ia32"。
+	7		os.release()返回操作系统的发行版本。
+	8		os.uptime()返回操作系统运行的时间，以秒为单位。
+	9		os.loadavg()返回一个包含 1、5、15 分钟平均负载的数组。
+	10		os.totalmem()返回系统内存总量，单位为字节。
+	11		os.freemem()返回操作系统空闲内存量，单位是字节。
+	12		os.cpus()返回一个对象数组，包含所安装的每个 CPU/内核的信息：型号、速度（单位 MHz）、时间（一个包含 user、nice、sys、idle 和 irq 所使用 CPU/内核毫秒数的对象）。
+	13		os.networkInterfaces()获得网络接口列表。
+
+---->os-util.js
+
+
+ - 	Path 模块
+	提供了处理和转换文件路的工具。
+
+----->path-util.js
+ - Net 模块
+	用于底层的网络通信。提供了服务端和客户端的的操作。
+ - DNS 模块
+	用于解析域名。
+ - Domain 模块
+	简化异步代码的异常处理，可以捕捉处理try catch无法捕捉的。

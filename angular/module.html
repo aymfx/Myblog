@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app="module">
+		<div ng-controller="personCtrl">
+			
+		</div>
+		<!-----------分割线--------------------------------------------->
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			var app=angular.module('module',[]);
+			//在模块定义中 [] 参数用于定义模块的依赖关系。中括号[]表示该模块没有依赖，如果有依赖的话会在中括号写上依赖的模块名字。
+		</script>
+	</body>
+</html>
+
+<!--函数会影响到全局命名空间-->
+	JavaScript 中应避免使用全局函数。因为他们很容易被其他脚本文件覆盖。
+	AngularJS 模块让所有函数的作用域在该模块下，避免了该问题。
+<!--什么时候载入库?-->
+	对于 HTML 应用程序，通常建议把所有的脚本都放置在 <body> 元素的最底部。
+	这会提高网页加载速度，因为 HTML 加载不受制于脚本加载。
+	在我们的多个 AngularJS 实例中，您将看到 AngularJS 库是在文档的 <head> 区域被加载。
+	在我们的实例中，AngularJS 在 <head> 元素中被加载，因为对 angular.module 的调用只能在库加载完成后才能进行。
+	另一个解决方案是在 <body> 元素中加载 AngularJS 库，但是必须放置在您的 AngularJS 脚本前面：
+
+//方案
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="utf-8">
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+	
+	<div ng-app="myApp" ng-controller="myCtrl">
+	{{ firstName + " " + lastName }}
+	</div>
+	<script>
+	var app = angular.module("myApp", []);
+	app.controller("myCtrl", function($scope) {
+	    $scope.firstName = "John";
+	    $scope.lastName = "Doe";
+	});
+	</script>
+	
+	</body>
+	</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html ng-app="myNoteApp">
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div ng-controller="myNoteCtrl">
+			<h2>我的笔记</h2>
+			<p>
+				<textarea rows="10" cols="40" ng-model="message"></textarea>
+			</p>
+			<p>
+			<button ng-click="save()"></button>
+			<button ng-click="clear()"></button>
+			</p>
+			<p>Number of characters left:<span ng-bind="left()"></span></p>
+		</div>
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app=angular.module('myNoteApp',[]);
+			app.controller('myNoteCtrl',['$scope',function(scope){
+				scope.message='';
+				scope.left=function(){
+					return 100-scope.message.length;
+				}
+				scope.clear=function(){
+					scope.message='';
+				}
+				scope.save=function(){
+					alert("Note Saved");
+				}
+			}])
+		</script>
+	</body>
+</html>

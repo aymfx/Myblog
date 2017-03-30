@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app="event">
+		<div ng-controller="personCtrl">
+
+			<button ng-click="toggle()">隐藏/显示</button>
+			
+			<p ng-hide="myVar">
+			名: <input type="text" ng-model="firstName"><br>
+			姓名: <input type="text" ng-model="lastName"><br>
+			<br>
+			Full Name: {{firstName + " " + lastName}}
+			</p>
+
+		</div>
+		<!-----------分割线--------------------------------------------->
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			var app=angular.module('event',[]);
+			app.controller('personCtrl', function($scope) {
+			    $scope.firstName = "John",
+			    $scope.lastName = "Doe"
+			    $scope.myVar = false;
+			    $scope.toggle = function() {
+			        $scope.myVar = !$scope.myVar;
+			    };
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app="dom">
+		<div ng-init="mySwitch=true">
+			<p>ng-disbaled命令</p>
+			<p>
+				<button ng-disabled="mySwitch">点我</button>
+			</p>
+			<p>
+				<input type="checkbox" ng-model="mySwitch" />按钮
+			</p>
+			<p>
+				{{mySwitch}}
+			</p>
+		</div>
+		
+		<div>
+			<p ng-show="true">我是可见的</p>
+			<p ng-show="fasle">我是不可见的</p>
+		</div>
+		
+		<div>
+			<p ng-hide="fasle">我是可见的</p>
+			<p ng-hide="true">我是不可见的</p>
+		</div>
+		<!-----------分割线--------------------------------------------->
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			var app=angular.module('dom',[]);
+		</script>
+	</body>
+</html>

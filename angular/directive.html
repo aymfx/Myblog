@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="directive">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	<input type="checkbox" ng-model="toggle"/>
+	<div ly-show="toggle">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt iste ex labore iure ut blanditiis eos eum voluptates odit nulla nisi delectus aut assumenda qui facere iusto nobis quis possimus.
+	</div>
+	<input type="text" ng-model="color"/>
+	<ly-color r="color" name="我是不一样的烟火" ng-click="test()">
+		
+	</ly-color>
+	
+    <script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+		var app=angular.module("directive",[]);
+		
+		app.run(function($rootScope){
+			 $rootScope.toggle=true;
+		})
+		
+		app.directive("lyShow",function(){
+			return {
+				restrict:'A',
+				link:function(scope,element,attr){
+					
+					scope.$watch('value',function(newv,oldv){
+						console.log(newv);
+						  if(newv){
+						  		element[0].style.display="block";
+						  }else{
+						  		element[0].style.display="none";
+						  }
+						
+					})
+				},
+				scope:{
+					value:"=lyShow"
+				}
+			}
+		})
+		
+		app.directive('lyColor',function(){
+			return {
+				restroct:"E",
+				templateUrl:"directive-mess.html",
+				link:function(scope,ele,attr){
+					  scope.test=function(){
+					  	console.log("ahahahhah");
+					  }
+				},
+				scope:{
+					name:"@name",
+					color:"=r"
+					
+				},
+				replace:true
+			}
+		})
+    </script>
+	</body>
+</html>

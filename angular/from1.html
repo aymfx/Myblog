@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app="form">
+		<h2>表单验证</h2>
+		<form ng-controller='validateCtrl' name="myfrom">
+			<p>用户名<br />
+			<input type="text" ng-model="user" name="user" required=""/>
+			<span style="color:red" ng-show="myfrom.user.$invalid && myfrom.user.$dirty">
+				<span ng-show="myfrom.user.$error.required">用户名是必填项</span>
+			</span>
+			</p>
+			<p>邮箱:<br />
+			<input type="email" ng-model="email" required="" name="email" />
+			<span style="color:red" ng-show="myfrom.email.$invalid && myfrom.email.$dirty">
+				<span ng-show="myfrom.email.$error.required">邮箱是必填项</span>
+				<span ng-show="myfrom.email.$error.email">邮箱必须合法</span>
+			</span>
+			</p>
+			<p>
+				<input type="submit" ng-disabled="myfrom.user.$invalid && myfrom.user.$dirty || myfrom.email.$invalid && myfrom.email.$dirty"/>
+			</p>
+		</form>
+		
+		
+		
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app=angular.module('form',[]);
+	
+			app.controller('validateCtrl', function($scope) {
+				    $scope.user = 'John Doe';
+				    $scope.email = 'john.doe@gmail.com';
+			});
+		</script>
+	</body>
+</html>
+
+
+<!--
+$dirty		表单有填写记录
+$valid		字段内容合法的
+$invalid	字段内容是非法的
+$pristine	表单没有填写记录
+-->

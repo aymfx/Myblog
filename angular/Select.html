@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="select">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--使用 ng-options 创建选择框-->
+		<div ng-controller="myCtrl">
+			<p>使用 ng-options 创建选择框</p>
+			<select  ng-model="selectName" ng-options="x for x in names">
+			</select>
+			
+			<p>使用ng-repeat创建</p>
+			<select>
+				<option ng-repeat="x in names">
+					{{x}}
+				</option>
+			</select>
+			
+			<!--<p>使用ng-repeat创建 （对象）</p>
+			<select ng-model="selectedSite">
+			<option ng-repeat="x in sites" value="{{x.url}}">{{x.site}}</option>
+			</select>
+			<h1>你选择的是: {{selectedSite}}</h1>-->
+			
+			<!--<p>使用 ng-options （对象）</p>
+			<select ng-model="selectedSite" ng-options="x.site for x in sites">
+			</select>
+			<h1>你选择的是: {{selectedSite.site}}</h1>
+			<p>网址为: {{selectedSite.url}}</p>-->
+			
+			<!--<p>使用 ng-options （改写1）</p>
+			<select ng-model="selectedSite" ng-options="x for (x,y) in sites2">
+			</select>
+			<h1>你选择的是: {{selectedSite}}</h1>-->
+			
+			<p>使用 ng-options （改写2）</p>
+			<select ng-model="selectedSite" ng-options="y.brand for (x,y) in cars">
+			</select>
+			<h1>你选择的是: {{selectedSite.brand}}</h1>
+			<h1>型号是: {{selectedSite.model}}</h1>
+			<h1>颜色是: {{selectedSite.color}}</h1>
+		</div>
+		
+		
+		
+		
+		<!-----------分割线--------------------------------------------->
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="select.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

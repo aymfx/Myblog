@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+	<!--mvc scope的应用-->
+ 	<div id="" ng-controller="myCtrl">
+ 		<input type="text" ng-model="name" />
+ 		<h1>{{ greeting }}</h1>
+ 		<button ng-click='sayHello()'>点我</button>
+ 	</div>
+ 	<div ng-controller="myCtrl1">
+ 		<!--根作用域-->
+ 		
+ 		<h2>{{lastName}} 家庭成员:</h2>
+ 		<ul>
+ 			<li ng-repeat="x in names">{{x}} {{lastName | uppercase }}</li>
+ 		</ul>
+ 	</div>
+ 	
+ 	<!--AngularJS 过滤器-->
+ 	
+ 	<div >
+ 		<input type="number" ng-model="quantity"/>
+ 		<input type="number" ng-model="price"/>
+ 		
+ 		<p>总价 = {{(quantity * price) | currency}}</p>
+ 		
+ 		<!--data格式化-->
+ 		{{15985588752255 | date:"yyy-MM-dd HH:mm:ss"}}<br />
+ 		<!--number:2;保留两位小数-->
+ 		
+ 		{{189.15688 | number:2}}<br />
+ 		<!--filter查找输入过滤器可以通过一个管道字符（|）和一个过滤器添加到指令中，该过滤器后跟一个冒号和一个模型名称。-->
+			{{ [{"age": 20,"id": 10,"name": "iphone"},
+			{"age": 12,"id": 11,"name": "sunm xing"},
+			{"age": 44,"id": 12,"name": "test abc"}
+			] | filter:{'name':'iphone'} }}  
+		
+		<!--filter-->
+		<p>filter</p>
+	    <input type="text" ng-model="key" />
+		<ul>
+			<li ng-repeat="item in family  | filter:{name:key}">
+				{{item.name+"---"+item.age}}
+			</li>
+		</ul>
+		
+		<!--自定义搜索-->
+		<p>自定义搜索</p>
+		<input type="text" ng-model="key" />
+		<ul>
+			<li ng-repeat="item in family  | filter:{name:key}">
+				{{item.name+"---"+item.age}}
+			</li>
+		</ul>
+		
+		<!--排序-->
+		
+		<p>排序 升序</p>
+		<ul>
+			<li ng-repeat="item in paixu  | sort track by $index">
+				{{item}}
+			</li>
+		</ul>
+		
+		<p>limitTo 截取   1234567890</p>
+		{{"1234567890" | limitTo :6}} // 从前面开始截取6位
+		{{"1234567890" | limitTo:-4}} // 从后面开始截取4位
+		
+		<p>降序</p>
+		{{ [{"age": 20,"id": 10,"name": "iphone"},
+		{"age": 12,"id": 11,"name": "sunm xing"},
+		{"age": 44,"id": 12,"name": "test abc"}
+		] | orderBy:'id':true }}
+		
+		<p>数组去重</p>
+		<ul>
+			<li ng-repeat="item in arr  | nopreate track by $index">
+				{{item}}
+			</li>
+		</ul>
+			
+			
+ 	</div>
+ 	
+ 	<!--<div ng-controller="myCtrl2">
+ 		
+ 	</div>-->
+ 	
+ 	
+ 	
+    <script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+    <!--外部文件中的控制器-->
+    <script src="js/personController.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

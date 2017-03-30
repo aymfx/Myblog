@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app="myroute">
+		<h2>路由器的应用</h2>
+		<div ng-view></div>
+		<ul>
+			<li><a href="#/">首页</a></li>
+			<li><a href="#/computers">电脑</a></li>
+			<li><a href="#/printers">打印机</a></li>
+			<li><a href="#/blabla">其他</a></li>
+		</ul>
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/angular-route.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app=angular.module('myroute',['ngRoute']);
+			app.config(['$routeProvider',function(router){
+				router
+				.when('/',{
+					template:"<h2>我是首页</h2>"
+				})
+				.when('/computers',{
+					template:"<h2>computers</h2>"
+				})
+				.when('/printers',{
+					template:"<h2>printers</h2>"
+				})
+				.otherwise({
+					redirectTo:'/'
+				})
+			}])
+		</script>
+	</body>
+</html>

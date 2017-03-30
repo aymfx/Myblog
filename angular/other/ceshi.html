@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var arg1, arg2, arg3;
+
+			function debounce(func, wait) {
+				var timeId = null;
+				arg1 = arguments;
+				return function() {
+					var arg2 = arguments;
+					var later = function() {
+						func.apply(null, arg2);
+						
+					}
+					//最最精华的一句，非常的巧妙
+					clearTimeout(timeId)
+					timeId = setTimeout(function() {
+						later();
+					}, wait || 200)
+				}
+			}
+			debounce(function(a,b){
+				
+			},300)();
+			console.log(arg1,"+",arg2);
+		
+		</script>
+	</body>
+
+</html>
