@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app="mytest">
+		<div ng-init="name='liu'">{{name}}</div>
+		<div ng-include="'other/include.html'">sada</div>
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app=angular.module('mytest',[]);
+		</script>
+	</body>
+</html>
+
+<!--注意要加单引号-->

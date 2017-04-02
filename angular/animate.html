@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div {
+			  transition: all linear 0.5s;
+			  background-color: lightblue;
+			  height: 100px;
+			  width: 100%;
+			  position: relative;
+			  top: 0;
+			  left: 0;
+				}
+			.ng-hide {
+				  height: 0;
+				  width: 0;
+				  background-color: transparent;
+				  top:-200px;
+				  left: 200px;
+				}
+		</style>
+	</head>
+	<body ng-app="myanimate">
+		<div>
+			<p>隐藏</p>
+			隐藏div <input type="checkbox" ng-model='myCheck' />
+			<div ng-hide="myCheck" class="box">
+				我会消失哦
+			</div>
+		</div>
+		
+		
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/angular-animate.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app=angular.module('myanimate',['ngAnimate']);
+				
+			
+		</script>
+	</body>
+</html>

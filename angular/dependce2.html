@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app="mainApp">
+		<div ng-controller="CalcController">
+			<p>输入一个数: <input type="number" ng-model="number"/>    </p>
+			<button ng-click="square">
+				X<sup>2</sup>
+			</button>
+			<p>结果: {{result}}</p>
+		</div>
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/*可以避免闪烁*/
+			[ng-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body ng-app="myapp" ng-cloak>
+		<div ng-controller="myCtrl">
+			<p>{{x1}}</p>
+			<p>{{x2}}</p>
+		</div>
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app=angular.module('myapp',[]);
+			app.controller('myCtrl',function($scope){
+				$scope.x1='JHON';
+				$scope.x2=angular.lowercase();
+				console.log(angular.isString($scope.x1));
+				console.log(angular.isNumber($scope.x1));
+			})
+		</script>
+	</body>
+</html>
