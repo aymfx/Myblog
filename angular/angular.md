@@ -283,7 +283,41 @@ novalidate 属性在应用中不是必须的，但是你需要在 AngularJS 表�
 ---->from.html   form1.html
 
 
+#AngularJS 全局 API
+	AngularJS 全局 API 用于执行常见任务的 JavaScript 函数集合，如：
+	比较对象
+	迭代对象
+	转换对象
+	angular.lowercase()	转换字符串为小写
+	angular.uppercase()	转换字符串为大写
+	angular.isString()	判断给定的对象是否为字符串，如果是返回 true。
+	angular.isNumber()	判断给定的对象是否为数字，如果是返回 true。
  
- 
+----->api.html
+
+#bootstrap.css
+
+---->bootstrap.html
+
+#AngularJS 包含
+		//注意加单引号
+---->includes.html
+
+
+#AngularJS 动画
+
+------>animate.html
+
+#AngularJS 依赖注入
+	wiki 上的解释是：依赖注入（Dependency Injection，简称DI）是一种软件设计模式，在这种模式下，一个或更多的依赖（或服务）被注入（或者通过引用传递）到一个独立的对象（或客户端）中，然后成为了该客户端状态的一部分。
+	该模式分离了客户端依赖本身行为的创建，这使得程序设计变得松耦合，并遵循了依赖反转和单一职责原则。与服务定位器模式形成直接对比的是，它允许客户端了解客户端如何使用该系统找到依赖
+	一句话：没事你不要来找我，有事我会去找你。
+
+ - AngularJS 提供很好的依赖注入机制。以下5个核心组件用来作为依赖注入：
+	value
+	factory
+	service
+	provider
+	constant
  
  
