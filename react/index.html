@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+   	
+  </head>
+  <body>
+    <div id="example"></div>
+    <!--我是一个分割线------------------------------------------>
+    <script src="build/react.js" type="text/javascript" charset="utf-8"></script>
+   	<script src="build/react-dom.js" type="text/javascript" charset="utf-8"></script>
+   	<script src="build/browser.min.js" type="text/javascript" charset="utf-8"></script>
+   	<script type="text/babel">
+    	var Ly=React.createClass({
+    		getDefaultProps:function(){
+    			return {
+    				name:'ly'
+    			}
+    		},
+    		render:function(){
+    			
+    			
+    			return (
+    				<p>
+    				  一二三四五 {this.props.name}上山打老虎
+    				</p>
+    			)
+    		}
+    	})
+    	ReactDOM.render(<Ly></Ly>,document.getElementById('example'));
+    </script>
+  </body>
+</html>

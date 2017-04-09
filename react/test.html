@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React.js</title>
+	<style>
+		.single span{
+			margin:0 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="example"></div>
+	<script src="build/react.js"></script>
+	<script src="build/react-dom.js"></script>
+	<script src="build/browser.min.js"></script>
+	
+	<!-- <script src="js/test.jsx"></script> -->
+	<script type="text/babel">
+		var data=[{
+			name:'水仙',
+			price:20,
+			count:2
+		},{
+			name:'满天星',
+			price:10,
+			count:20
+		},{
+			name:'向日葵',
+			price:10,
+			count:5
+		}];
+		var SingleList=React.createClass({
+			getInitialState:function(){
+				return {
+					liked:false
+				}
+			},
+			render:function(){
+				return(
+					<div className="single">
+						<span>{this.props.item.name}</span>
+						<span onClick={this.minus}>-</span>
+						<span>{this.props.item.count}</span>
+						<span onClick={this.plus}>+</span>
+						<span>￥{this.props.item.price}</span>
+					</div>
+				)
+			},
+			plus:function(){
+				this.props.item.count++;
+				this.setState({liked:!this.state.liked});
+			},
+			minus:function(){
+				this.props.item.count--;
+				this.setState({liked:!this.state.liked});
+			}
+		});
+		
+		var Container=React.createClass({
+			getInitialState:function(){
+				return {
+					liked:false
+				}
+			},
+			render:function(){
+				var sum=0;
+				var list=data.map(function(ele,index){
+					sum+=ele.price*ele.count;
+					return <SingleList item={ele} key={index}></SingleList>
+					//key={index}必须要有的原因：这个是和react的dom-diff算法相关的。react对dom做遍历的时候，会根据data-reactid生成虚拟dom树。如果你没有手动的添加unique constant key的话，react是无法记录你的dom操作的。它只会在重新渲染的时候，继续使用相应dom数组的序数号(就是array[index]这种)来比对dom树。（当对比dom树时，dom树没有，那么就会对所有数据进行刷新，从而耗性能）
+				});
+				return(
+					<div>
+						{list}
+						<p>总价：{sum}</p>
+					</div>
+				)
+			}
+		});
+
+			ReactDOM.render(<Container></Container>,document.getElementById('example'));
+		
+	
+	</script>
+</body>
+</html>

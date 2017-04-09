@@ -13,5 +13,35 @@
 			<p>结果: {{result}}</p>
 		</div>
 		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			  var mainApp=angular.module("mianApp",[]);
+			  mainApp.config(function($provide){
+			  	$provide.provider('MathService',function(){
+			  		this.$get=function(){
+			  			var factory={}
+			  			
+			  			factory.multiply=function(a,b){
+			  				return a*b;
+			  			}
+			  			
+			  			return factory;
+			  		}
+			  	});
+			  });
+			  
+			  mainApp.value('defaultInput',5);
+			  
+			  mainApp.factory('MathService',function(){
+			  		var factory={}
+			  			
+			  			factory.multiply=function(a,b){
+			  				return a*b;
+			  			}
+			  			
+			  			return factory;
+			  })
+			  
+			  
+		</script>
 	</body>
 </html>
